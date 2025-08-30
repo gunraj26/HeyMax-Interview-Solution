@@ -32,7 +32,7 @@ interface BookVaultProps {
 export function BookVault({ initialBooks, userId }: BookVaultProps) {
   const [books, setBooks] = useState<Book[]>(initialBooks)
   const [searchQuery, setSearchQuery] = useState("")
-  const [filterStatus, setFilterStatus] = useState<"all" | "listed" | "unlisted">("all")
+  const [filterStatus, setFilterStatus] = useState<"all" | "listed" | "unlisted">("listed")
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
 
   const filteredBooks = books.filter((book) => {
