@@ -31,6 +31,8 @@ interface Book {
   is_listed: boolean
   created_at: string
   updated_at: string
+  contact_email: string
+  contact_phone: string
 }
 
 interface EditBookDialogProps {
@@ -57,6 +59,8 @@ export function EditBookDialog({ book, open, onOpenChange, onBookUpdated }: Edit
       const description = formData.get("description") as string
       const genre = formData.get("genre") as string
       const isListed = formData.get("isListed") === "on"
+      const contactEmail = formData.get("contactEmail") as string
+      const contactPhone = formData.get("contactPhone") as string
 
       const { data, error: updateError } = await supabase
         .from("books")
@@ -68,6 +72,8 @@ export function EditBookDialog({ book, open, onOpenChange, onBookUpdated }: Edit
           description: description || null,
           genre: genre || null,
           is_listed: isListed,
+          contact_email: contactEmail,
+          contact_phone: contactPhone,
         })
         .eq("id", book.id)
         .select()
@@ -133,6 +139,37 @@ export function EditBookDialog({ book, open, onOpenChange, onBookUpdated }: Edit
           <div className="space-y-2">
             <Label htmlFor="description">Description</Label>
             <Textarea id="description" name="description" defaultValue={book.description || ""} rows={3} />
+          </div>
+
+          <div className="space-y-4 border-t pt-4">
+            <div>
+              <Label className="text-base font-semibold">Contact Information</Label>
+              <p className="text-sm text-muted-foreground">
+                This information will be shared with traders when you accept their offers
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="contactEmail">Email *</Label>
+              <Input
+                id="contactEmail"
+                name="contactEmail"
+                type="email"
+                defaultValue={book.contact_email || ""}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="contactPhone">Phone *</Label>
+              <Input
+                id="contactPhone"
+                name="contactPhone"
+                type="tel"
+                defaultValue={book.contact_phone || ""}
+                required
+              />
+            </div>
           </div>
 
           <div className="flex items-center space-x-2">

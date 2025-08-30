@@ -33,6 +33,8 @@ interface Book {
   is_listed: boolean
   created_at: string
   updated_at: string
+  contact_email: string
+  contact_phone: string
 }
 
 interface AddBookDialogProps {
@@ -62,7 +64,6 @@ export function AddBookDialog({ open, onOpenChange, onBookAdded, userId }: AddBo
       const isListed = formData.get("isListed") === "on"
       const contactEmail = formData.get("contactEmail") as string
       const contactPhone = formData.get("contactPhone") as string
-      const contactSocial = formData.get("contactSocial") as string
 
       // Upload images if any
       const photoUrls: string[] = []
@@ -96,9 +97,8 @@ export function AddBookDialog({ open, onOpenChange, onBookAdded, userId }: AddBo
           genre: genre || null,
           photo_urls: photoUrls,
           is_listed: isListed,
-          contact_email: contactEmail || null,
-          contact_phone: contactPhone || null,
-          contact_social: contactSocial || null,
+          contact_email: contactEmail,
+          contact_phone: contactPhone,
         })
         .select()
         .single()
@@ -193,18 +193,13 @@ export function AddBookDialog({ open, onOpenChange, onBookAdded, userId }: AddBo
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="contactEmail">Email</Label>
-              <Input id="contactEmail" name="contactEmail" type="email" placeholder="your@email.com" />
+              <Label htmlFor="contactEmail">Email *</Label>
+              <Input id="contactEmail" name="contactEmail" type="email" placeholder="your@email.com" required />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="contactPhone">Phone</Label>
-              <Input id="contactPhone" name="contactPhone" type="tel" placeholder="+1 (555) 123-4567" />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="contactSocial">Social Media / Other</Label>
-              <Input id="contactSocial" name="contactSocial" placeholder="Instagram, Discord, etc." />
+              <Label htmlFor="contactPhone">Phone *</Label>
+              <Input id="contactPhone" name="contactPhone" type="tel" placeholder="+1 (555) 123-4567" required />
             </div>
           </div>
 

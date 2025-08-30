@@ -7,19 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import {
-  BookOpen,
-  ArrowLeft,
-  Clock,
-  CheckCircle,
-  XCircle,
-  User,
-  MapPin,
-  Mail,
-  Phone,
-  ExternalLink,
-  Loader2,
-} from "lucide-react"
+import { BookOpen, ArrowLeft, Clock, CheckCircle, XCircle, User, MapPin, Mail, Phone, Loader2 } from "lucide-react"
 import { AuthButton } from "@/components/auth/auth-button"
 import { createClient } from "@/lib/supabase/client"
 
@@ -84,20 +72,17 @@ export function OfferDetail({ offer, candidateBooks, currentUserId, userRole }: 
           // If I'm the requester, show the requested book's contact info
           email: book?.contact_email,
           phone: book?.contact_phone,
-          social: book?.contact_social,
         }
       : selectedBook
         ? {
             // If I'm the owner and there's a selected book, show that book's contact info
             email: selectedBook.contact_email,
             phone: selectedBook.contact_phone,
-            social: selectedBook.contact_social,
           }
         : {
             // Fallback: If I'm the owner but no book selected yet, show requester's general contact
             email: otherUser?.email,
             phone: otherUser?.phone,
-            social: otherUser?.social_profile,
           }
 
   const userInitials =
@@ -508,20 +493,6 @@ export function OfferDetail({ offer, candidateBooks, currentUserId, userRole }: 
                       <Phone className="h-4 w-4 text-muted-foreground" />
                       <a href={`tel:${contactInfo.phone}`} className="text-primary hover:underline">
                         {contactInfo.phone}
-                      </a>
-                    </div>
-                  )}
-
-                  {contactInfo?.social && (
-                    <div className="flex items-center gap-2 text-sm">
-                      <ExternalLink className="h-4 w-4 text-muted-foreground" />
-                      <a
-                        href={contactInfo.social}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline"
-                      >
-                        Social Profile
                       </a>
                     </div>
                   )}
