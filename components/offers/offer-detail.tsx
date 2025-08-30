@@ -194,10 +194,8 @@ export function OfferDetail({ offer, candidateBooks, currentUserId, userRole }: 
 
       const { error: exchangeError } = await supabase.from("exchanges").insert({
         offer_id: offer.id,
-        requester_id: offer.requester_id,
-        owner_id: offer.books.owner_id,
-        requested_book_id: offer.book_id,
-        offered_book_ids: offer.selected_candidates || [],
+        requester_confirmed: true,
+        owner_confirmed: true,
         completed_at: new Date().toISOString(),
       })
 
@@ -207,7 +205,6 @@ export function OfferDetail({ offer, candidateBooks, currentUserId, userRole }: 
       const { error: booksError } = await supabase
         .from("books")
         .update({
-          status: "exchanged",
           is_listed: false,
         })
         .in("id", bookIds)
