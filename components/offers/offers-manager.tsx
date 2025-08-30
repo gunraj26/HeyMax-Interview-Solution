@@ -123,16 +123,6 @@ export function OffersManager({ incomingOffers, outgoingOffers, userId }: Offers
               <div className="text-2xl font-bold text-yellow-600">{incomingCounts.pending || 0}</div>
             </CardContent>
           </Card>
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Active Trades</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-green-600">
-                {(incomingCounts.contact_revealed || 0) + (outgoingCounts.contact_revealed || 0)}
-              </div>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Offers Tabs */}

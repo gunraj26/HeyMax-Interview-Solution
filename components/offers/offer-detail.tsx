@@ -188,10 +188,6 @@ export function OfferDetail({ offer, candidateBooks, currentUserId, userRole }: 
     setError(null)
 
     try {
-      const { error: offerError } = await supabase.from("offers").update({ status: "completed" }).eq("id", offer.id)
-
-      if (offerError) throw offerError
-
       const { error: exchangeError } = await supabase.from("exchanges").insert({
         offer_id: offer.id,
         requester_confirmed: true,
@@ -211,7 +207,11 @@ export function OfferDetail({ offer, candidateBooks, currentUserId, userRole }: 
 
       if (booksError) throw booksError
 
-      window.location.reload()
+      const { error: deleteError } = await supabase.from("offers").delete().eq("id", offer.id)
+
+      if (deleteError) throw deleteError
+
+      window.location.href = "/offers"
     } catch (error: any) {
       setError(error.message)
     } finally {

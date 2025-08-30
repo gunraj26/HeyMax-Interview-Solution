@@ -142,13 +142,13 @@ export function BookVault({ initialBooks, userId }: BookVaultProps) {
             />
           </div>
           <div className="flex gap-2">
-            <Button
+            {/* <Button
               variant={filterStatus === "all" ? "default" : "outline"}
               onClick={() => setFilterStatus("all")}
               size="sm"
             >
               All
-            </Button>
+            </Button> */}
             <Button
               variant={filterStatus === "listed" ? "default" : "outline"}
               onClick={() => setFilterStatus("listed")}
